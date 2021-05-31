@@ -1,8 +1,3 @@
-/*
-Simple MAPI.NET
-https://github.com/PandaWood/Simple-MAPI.NET
-*/
-
 using System;
 using System.Collections;
 using System.Globalization;
@@ -10,23 +5,12 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-// ReSharper disable SuggestVarOrType_BuiltInTypes
-// ReSharper disable UnassignedField.Global
-// ReSharper disable MemberCanBePrivate.Global
-// ReSharper disable UnusedMember.Local
-// ReSharper disable UnusedMember.Global
-// ReSharper disable IdentifierTypo
-// ReSharper disable once CheckNamespace
-#pragma warning disable 1591
-
 namespace Win32Mapi
 {
 	public class SimpleMapi
 	{
 		private const int MAPI_DIALOG = 8;
 		private static readonly bool UseUnicode = Environment.OSVersion.Version >= new Version(6, 2);
-
-		#region SESSION
 
 		// SESSION
 
@@ -71,10 +55,6 @@ namespace Win32Mapi
 
 		private IntPtr session = IntPtr.Zero;
 		private IntPtr winhandle = IntPtr.Zero;
-
-		#endregion
-
-		#region SENDING
 
 		public bool Send(string subject, string noteText, bool ShowDialog = true)
 		{
@@ -264,10 +244,6 @@ namespace Win32Mapi
 		private readonly ArrayList recpts = new ArrayList();
 		private readonly ArrayList attachs = new ArrayList();
 
-		#endregion
-
-		#region FINDING
-
 		public bool Next(ref MailEnvelop env)
 		{
 			error = MAPIFindNext(session, winhandle, null, findseed, MapiLongMsgID, 0, lastMsgID);
@@ -313,10 +289,6 @@ namespace Win32Mapi
 
 		private readonly StringBuilder lastMsgID = new StringBuilder(600);
 		private string findseed;
-
-		#endregion
-
-		#region READING
 
 		public string Read(string id, out MailAttach[] att)
 		{
@@ -453,10 +425,6 @@ namespace Win32Mapi
 
 		private MapiMessage lastMsg;
 
-		#endregion
-
-		#region ADDRESS
-
 		public bool SingleAddress(string label, out string name, out string addr)
 		{
 			name = null;
@@ -483,10 +451,6 @@ namespace Win32Mapi
 		private static extern int MAPIAddress(IntPtr sess, IntPtr hwnd, string caption,
 		                                      int editfld, string labels, int recipcount, IntPtr ptrrecips,
 		                                      int flg, int rsv, ref int newrec, ref IntPtr ptrnew);
-
-		#endregion
-
-		#region ERRORS
 
 		public string Error()
 		{
@@ -632,8 +596,6 @@ namespace Win32Mapi
 			/// </summary>
 			MAPI_E_ATTACHMENT_TOO_LARGE = 28
 		}
-
-		#endregion
 	}
 
 

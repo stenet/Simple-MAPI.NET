@@ -23,7 +23,7 @@ namespace SimpleMAPI
 			//!ma.Logon(IntPtr.Zero)		// this code is strictly correct, but won't work with Outlook 64-bit and is needed in the most common usage
 
 			ma.AddRecipient(args[0], null, false);
-			if (!ma.Send(args[1], args[2]))
+			if (!ma.Send(args[1], args[2], ShowDialog: false))
 			{
 				Console.WriteLine("MAPI SendMail failed! : " + ma.Error());
 				return;
